@@ -10,7 +10,7 @@ const Polygons = () => {
 
   console.log(loading, error, data);
 
-  if (loading || error) return null;
+  // if (loading || error) return null;
   const layerStyles = getLayerStyles(activeMap);
 
   return data ? (

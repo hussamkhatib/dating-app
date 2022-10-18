@@ -1,8 +1,8 @@
 import mapboxgl from "mapbox-gl";
 import { useState, useCallback } from "react";
 import ReactMap from "react-map-gl";
-import { activeMapType } from "../../activeMap";
 import Polygons from "./Polygons";
+import Tooltip from "./Tooltip";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
@@ -31,9 +31,9 @@ const Map = () => {
       features,
       point: { x, y },
     } = event;
-    // setHoverInfo({ x, y });
+    setHoverInfo({ x, y });
     const hoveredFeature = features?.[0] && features[0].properties;
-    // setHoverInfo(hoveredFeature && { property: hoveredFeature, x, y });
+    setHoverInfo(hoveredFeature && { property: hoveredFeature, x, y });
   }, []);
 
   return (
@@ -48,6 +48,7 @@ const Map = () => {
       mapStyle="mapbox://styles/mapbox/dark-v10"
     >
       <Polygons />
+      <Tooltip hoverInfo={hoverInfo} />
     </ReactMap>
   );
 };
