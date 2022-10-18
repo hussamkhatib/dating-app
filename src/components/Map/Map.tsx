@@ -1,6 +1,7 @@
 import mapboxgl from "mapbox-gl";
 import { useState, useCallback } from "react";
 import ReactMap from "react-map-gl";
+import { activeMapType } from "../../activeMap";
 import Polygons from "./Polygons";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
