@@ -1,16 +1,21 @@
+import { useSetAtom } from "jotai";
 import mapboxgl from "mapbox-gl";
-import { useState, useCallback } from "react";
-import ReactMap from "react-map-gl";
+import { useState, useCallback, useRef } from "react";
+import ReactMap, { MapRef } from "react-map-gl";
+import selectedAreaAtom from "../../selectedArea";
+import NavBar from "../NavBar";
 import Polygons from "./Polygons";
 import Tooltip from "./Tooltip";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
 const Map = () => {
+  const mapRef = useRef<MapRef>(null);
+  const setSelectedAtom = useSetAtom(selectedAreaAtom);
   const [viewState, setViewState] = useState({
     longitude: 77.57,
     latitude: 12.89,
-    zoom: 10.4,
+    zoom: 12,
     pitch: 45,
     bearing: 340,
   });
@@ -20,8 +25,8 @@ const Map = () => {
     const { features } = e;
 
     if (features[0]) {
-      // dispatch(setActiveArea(features[0].properties));
-      // dispatch(openLeftPanel());
+      const { area_id } = features[0].properties;
+      setSelectedAtom(area_id);
     }
   };
 
@@ -31,25 +36,35 @@ const Map = () => {
       features,
       point: { x, y },
     } = event;
-    setHoverInfo({ x, y });
     const hoveredFeature = features?.[0] && features[0].properties;
     setHoverInfo(hoveredFeature && { property: hoveredFeature, x, y });
   }, []);
 
+  const onSelectCity = useCallback(
+    ({ longitude, latitude }: { longitude: number; latitude: number }) => {
+      mapRef.current?.flyTo({ center: [longitude, latitude], duration: 2000 });
+    },
+    []
+  );
+
   return (
-    <ReactMap
-      {...viewState}
-      onMove={(evt) => setViewState(evt.viewState)}
-      style={{ width: "100vw", height: "100vh" }}
-      mapboxAccessToken={mapboxgl.accessToken}
-      interactiveLayerIds={["data"]}
-      onClick={handleClick}
-      onMouseMove={onHover}
-      mapStyle="mapbox://styles/mapbox/dark-v10"
-    >
-      <Polygons hoverAreaId={hoverInfo?.property?.area_id} />
-      <Tooltip hoverInfo={hoverInfo} />
-    </ReactMap>
+    <>
+      <NavBar onSelectCity={onSelectCity} />
+      <ReactMap
+        {...viewState}
+        ref={mapRef}
+        onMove={(evt) => setViewState(evt.viewState)}
+        style={{ width: "100vw", height: "100vh" }}
+        mapboxAccessToken={mapboxgl.accessToken}
+        interactiveLayerIds={["data"]}
+        onClick={handleClick}
+        onMouseMove={onHover}
+        mapStyle="mapbox://styles/mapbox/dark-v10"
+      >
+        <Polygons />
+        <Tooltip hoverInfo={hoverInfo} />
+      </ReactMap>
+    </>
   );
 };
 

@@ -30,7 +30,7 @@ export const getLayerStyles = (
     source: "my-data",
     type: "fill",
     paint: {
-      // "fill-outline-color": "#fff",
+      "fill-outline-color": "#000",
       "fill-color": {
         property,
         stops: getStops(min, max),
@@ -45,7 +45,6 @@ export const highlightedLayerStyles: FillLayer = {
   type: "fill",
 
   paint: {
-    "fill-outline-color": "#000",
     "fill-opacity": 0.75,
     "fill-color": "red",
   },

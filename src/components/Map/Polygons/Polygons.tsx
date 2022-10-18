@@ -4,19 +4,17 @@ import { Layer, Source } from "react-map-gl";
 import { getLayerStyles, highlightedLayerStyles } from "./getLayerStyles";
 import { activeMapType } from "../../../activeMap";
 import { useAtom } from "jotai";
+import selectedAreaAtom from "../../../selectedArea";
 
-type Props = {
-  hoverAreaId: string;
-};
-
-const Polygons: FC<Props> = ({ hoverAreaId }) => {
+const Polygons = () => {
   const [activeMap] = useAtom(activeMapType);
+  const [selectedArea] = useAtom(selectedAreaAtom);
   const { data, loading, error } = useApi(activeMap);
 
   // if (loading || error) return null;
   const layerStyles = getLayerStyles(activeMap);
 
-  const filter = useMemo(() => ["in", "area_id", hoverAreaId], [hoverAreaId]);
+  const filter = useMemo(() => ["in", "area_id", selectedArea], [selectedArea]);
 
   return data ? (
     <Source id="my-data" type="geojson" data={data}>
