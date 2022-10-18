@@ -20,7 +20,7 @@ export const getStops = (a: number, b: number): [number, string][] => {
 };
 
 // property -> values on the geojson
-const getLayerStyles = (
+export const getLayerStyles = (
   property: string,
   min: number = 0,
   max: number = 260
@@ -30,7 +30,7 @@ const getLayerStyles = (
     source: "my-data",
     type: "fill",
     paint: {
-      "fill-outline-color": "rgb(52,51,50)",
+      // "fill-outline-color": "#fff",
       "fill-color": {
         property,
         stops: getStops(min, max),
@@ -38,4 +38,15 @@ const getLayerStyles = (
     },
   };
 };
-export default getLayerStyles;
+
+export const highlightedLayerStyles: FillLayer = {
+  id: "data-highlighted",
+  source: "my-data",
+  type: "fill",
+
+  paint: {
+    "fill-outline-color": "#000",
+    "fill-opacity": 0.75,
+    "fill-color": "red",
+  },
+};

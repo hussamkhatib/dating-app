@@ -47,7 +47,7 @@ const Map = () => {
       onMouseMove={onHover}
       mapStyle="mapbox://styles/mapbox/dark-v10"
     >
-      <Polygons />
+      <Polygons hoverAreaId={hoverInfo?.property?.area_id} />
       <Tooltip hoverInfo={hoverInfo} />
     </ReactMap>
   );

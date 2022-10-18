@@ -33,7 +33,6 @@ const useAPI = (activeMap: mapType) => {
                 };
               }
             }
-            console.log(areas);
 
             areas["features"].forEach((area: any) => {
               area["properties"]["proUsers"] =
