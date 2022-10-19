@@ -39,7 +39,7 @@ const Map = () => {
     if (hoveredFeature) {
       const hoverInfo = { property: hoveredFeature, x, y };
       setHoverInfo(hoverInfo);
-    }
+    } else setHoverInfo(null);
   }, []);
 
   const onSelectCity = useCallback(
