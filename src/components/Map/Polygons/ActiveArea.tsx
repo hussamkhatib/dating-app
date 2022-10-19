@@ -11,6 +11,7 @@ const ActiveArea: FC<Props> = ({ selectedArea }) => {
   const setSelectedArea = useSetAtom(selectedAreaAtom);
   const copyProperty: any = { ...selectedArea };
   delete copyProperty.area_id;
+  if (copyProperty?.coordinates) delete copyProperty.coordinates;
   return (
     <div className="fixed top-16 p-4 left-0 flex flex-col bg-white">
       <button

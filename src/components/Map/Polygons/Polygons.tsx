@@ -15,8 +15,6 @@ const Polygons = () => {
   const [filter] = useAtom(filterAtom);
   const { data, loading, error } = useApi(activeMap, filter);
 
-  // if (loading || error) return null;
-
   const layerStyles = getLayerStyles(
     activeMap,
     data?.range?.min,
@@ -27,7 +25,6 @@ const Polygons = () => {
     () => ["in", "area_id", selectedArea?.area_id],
     [selectedArea?.area_id]
   );
-  console.log(selectedArea?.area_id);
 
   return data ? (
     <>
