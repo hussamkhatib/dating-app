@@ -2,10 +2,13 @@ import { useMemo } from "react";
 import useApi from "../../../hooks/useAPI";
 import { Layer, Source } from "react-map-gl";
 import { getLayerStyles, highlightedLayerStyles } from "./getLayerStyles";
-import { activeMapType } from "../../../activeMap";
+import {
+  activeMapType,
+  filterAtom,
+  SelectedArea,
+  selectedAreaAtom,
+} from "../../../atom";
 import { useAtom } from "jotai";
-import selectedAreaAtom, { SelectedArea } from "../../../selectedArea";
-import { filterAtom } from "../../../filterAtom";
 import Range from "./Range";
 import ActiveArea from "./ActiveArea";
 

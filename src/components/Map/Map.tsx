@@ -2,7 +2,7 @@ import { useSetAtom } from "jotai";
 import mapboxgl from "mapbox-gl";
 import { useState, useCallback, useRef } from "react";
 import ReactMap, { MapRef } from "react-map-gl";
-import selectedAreaAtom from "../../selectedArea";
+import { selectedAreaAtom } from "../../atom";
 import Filter from "../Filter";
 import NavBar from "../NavBar";
 import Polygons from "./Polygons";

@@ -1,6 +1,6 @@
 import { PlayIcon } from "@heroicons/react/24/outline";
 import { useSetAtom } from "jotai";
-import { isFilterPanelOpenAtom } from "../../filterAtom";
+import { isFilterPanelOpenAtom } from "../../atom";
 
 const ToggleFilter = () => {
   const isFilterPanelOpen = useSetAtom(isFilterPanelOpenAtom);

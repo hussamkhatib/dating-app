@@ -1,7 +1,7 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { useSetAtom } from "jotai";
-import selectedAreaAtom from "../../../selectedArea";
+import { selectedAreaAtom } from "../../../atom";
 
 type Props = {
   selectedArea: any;

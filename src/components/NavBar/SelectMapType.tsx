@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { activeMapType, mapType } from "../../activeMap";
+import { activeMapType, mapType } from "../../atom";
 import { useAtom } from "jotai";
 
 const list = Object.values(mapType);

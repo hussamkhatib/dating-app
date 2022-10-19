@@ -2,7 +2,7 @@ import { Dialog, Combobox, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useSetAtom } from "jotai";
-import selectedAreaAtom from "../../../selectedArea";
+import { selectedAreaAtom } from "../../../atom";
 
 // sameple API call to get coordinates: "https://api.mapbox.com/geocoding/v5/mapbox.places/J P NAGAR.json"
 const areasNames = [

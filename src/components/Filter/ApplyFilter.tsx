@@ -1,5 +1,5 @@
-import { useAtom, useSetAtom } from "jotai";
-import { filterAtom, isFilterPanelOpenAtom } from "../../filterAtom";
+import { useAtom } from "jotai";
+import { filterAtom, isFilterPanelOpenAtom } from "../../atom";
 import RadioFilter from "./RadioFilter";
 
 const ApplyFilter = () => {

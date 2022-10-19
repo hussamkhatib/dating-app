@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { mapType } from "../activeMap";
-import { FilterType } from "../filterAtom";
+import { mapType, FilterType } from "../atom";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
