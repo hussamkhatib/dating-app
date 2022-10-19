@@ -1,19 +1,16 @@
 import type { FillLayer } from "react-map-gl";
 
 const linearHeatMapColors = [
-  "#94f80b",
-  "#93ff00",
-  "#75e41c",
-  "#54c527",
-  "#40b02a",
-  "#2c9b2a",
-  "#198729",
-  "#047326",
+  "#fff33b",
+  "#fdc70c",
+  "#f3903f",
+  "#ed683c",
+  "#e93e3a",
 ];
 
 export const getStops = (a: number, b: number): [number, string][] => {
-  const diff = (b - a) / 8;
-  return Array.from({ length: 8 }, (_, i) => [
+  const diff = (b - a) / 5;
+  return Array.from({ length: 5 }, (_, i) => [
     a + diff * i,
     linearHeatMapColors[i],
   ]);
@@ -46,6 +43,6 @@ export const highlightedLayerStyles: FillLayer = {
 
   paint: {
     "fill-opacity": 0.75,
-    "fill-color": "red",
+    "fill-color": "#273F7D",
   },
 };

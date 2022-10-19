@@ -8,14 +8,11 @@ type Props = {
 
 // dynamic classes does not work with tailwind, hence defining it sepeartely
 const linearHeatMapColorsTailclasses = [
-  "bg-[#94f80b]",
-  "bg-[#93ff00]",
-  "bg-[#75e41c]",
-  "bg-[#54c527]",
-  "bg-[#40b02a]",
-  "bg-[#2c9b2a]",
-  "bg-[#198729]",
-  "bg-[#047326]",
+  "bg-[#fff33b]",
+  "bg-[#fdc70c]",
+  "bg-[#f3903f]",
+  "bg-[#ed683c]",
+  "bg-[#e93e3a]",
 ];
 
 const Range: FC<Props> = ({ min, max }) => {
