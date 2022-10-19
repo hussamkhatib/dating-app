@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { mapType } from "../activeMap";
+import { FilterType } from "../filterAtom";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-const useAPI = (activeMap: mapType) => {
+const useAPI = (activeMap: mapType, filters: FilterType) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any>(null);
@@ -20,12 +21,18 @@ const useAPI = (activeMap: mapType) => {
         ]);
 
         if (!loading && !error) {
+          // MAP 1
           if (activeMap === mapType.proUsers) {
             let proUsers = 0;
             let areaProperties: any = [];
             for (let i = 0; i < users.length; i++) {
               const user = users[i];
               const { area_id, total_matches, age, gender, is_pro_user } = user;
+
+              if (filters.age === "18-30" && age > 18 && age < 30) continue;
+              if (filters.age === "30+" && age > 30) continue;
+              if (filters.gender === gender || filters.gender === gender)
+                continue;
               if (is_pro_user) {
                 proUsers++;
                 areaProperties[area_id] = {
@@ -47,6 +54,9 @@ const useAPI = (activeMap: mapType) => {
             for (let i = 0; i < users.length; i++) {
               const user = users[i];
               const { area_id, total_matches, age, gender, is_pro_user } = user;
+              if (filters.age === "18-30" && age > 18 && age < 30) continue;
+              if (filters.age === "30+" && age > 30) continue;
+
               areaProperties[area_id] = {
                 users: (areaProperties[area_id]?.users || 0) + 1,
               };
@@ -64,7 +74,7 @@ const useAPI = (activeMap: mapType) => {
         setLoading(false);
       }
     })();
-  }, [activeMap, error]);
+  }, [activeMap, filters, error]);
 
   return { data, loading, error };
 };

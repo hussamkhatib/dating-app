@@ -3,6 +3,7 @@ import mapboxgl from "mapbox-gl";
 import { useState, useCallback, useRef } from "react";
 import ReactMap, { MapRef } from "react-map-gl";
 import selectedAreaAtom from "../../selectedArea";
+import Filter from "../Filter";
 import NavBar from "../NavBar";
 import Polygons from "./Polygons";
 import Tooltip from "./Tooltip";
@@ -62,6 +63,7 @@ const Map = () => {
         mapStyle="mapbox://styles/mapbox/dark-v10"
       >
         <Polygons />
+        <Filter />
         <Tooltip hoverInfo={hoverInfo} />
       </ReactMap>
     </>
