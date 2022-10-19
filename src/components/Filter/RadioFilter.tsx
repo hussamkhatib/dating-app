@@ -12,7 +12,9 @@ type Props = {
 const RadioFilter: FC<Props> = ({ value, label, onChange, options }) => {
   return (
     <RadioGroup className="py-2" value={value} onChange={onChange}>
-      <RadioGroup.Label className="text-lg">{label}</RadioGroup.Label>
+      <RadioGroup.Label className="text-lg font-semibold">
+        {label}
+      </RadioGroup.Label>
       <div className="space-y-2">
         {options.map((option) => (
           <RadioGroup.Option value={option} key={option}>
