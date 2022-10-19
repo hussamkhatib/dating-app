@@ -77,7 +77,7 @@ const CommandPalette = ({ onSelectCity }: any) => {
   return (
     <>
       <button
-        className="border-2 inline-flex w-40 items-center gap-x-2 text-sm py-1 px-4 rounded-xl"
+        className="border-2 inline-flex sm:w-40 items-center gap-x-2 text-sm py-1 px-4 rounded-xl"
         onClick={() => setIsOpen(true)}
       >
         <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" aria-hidden />

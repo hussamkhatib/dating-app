@@ -18,7 +18,7 @@ const SelectMapType = () => {
   return (
     <Listbox value={selected} onChange={handleOnChange}>
       <div className="relative mt-1">
-        <Listbox.Button className="relative min-w-[10rem] w-full pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default h-9 focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+        <Listbox.Button className="relative sm:min-w-[10rem] w-full pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default h-9 focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
           <span className="block truncate">
             {Array.isArray(selected)
               ? selected.map((value) => value).join(", ")
