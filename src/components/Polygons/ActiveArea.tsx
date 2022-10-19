@@ -1,15 +1,16 @@
 import { FC } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { useSetAtom } from "jotai";
-import { selectedAreaAtom } from "../../../atom";
+import { selectedAreaAtom } from "../../atom";
+import { PolygonProperties } from "../../types";
 
 type Props = {
-  selectedArea: any;
+  selectedArea: PolygonProperties;
 };
 
 const ActiveArea: FC<Props> = ({ selectedArea }) => {
   const setSelectedArea = useSetAtom(selectedAreaAtom);
-  const copyProperty: any = { ...selectedArea };
+  const copyProperty = { ...selectedArea };
   delete copyProperty.area_id;
   if (copyProperty?.coordinates) delete copyProperty.coordinates;
   return (
@@ -23,7 +24,7 @@ const ActiveArea: FC<Props> = ({ selectedArea }) => {
       >
         <XMarkIcon className="h-4 w-4" aria-hidden />
       </button>
-      {Object.entries(copyProperty).map(([key, value]: any) => (
+      {Object.entries(copyProperty).map(([key, value]) => (
         <div key={key} className="sm:text-lg flex flex-row">
           <div className="font-bold">{key}:</div>
           <div className="ml-1">{value}</div>

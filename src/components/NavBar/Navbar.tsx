@@ -1,5 +1,5 @@
 import { FC } from "react";
-import CommandPalette from "./CommandPallete";
+import CommandPalette from "../CommandPalette";
 import SelectMapType from "./SelectMapType";
 
 type Props = {

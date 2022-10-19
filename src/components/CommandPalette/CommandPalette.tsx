@@ -1,59 +1,18 @@
 import { Dialog, Combobox, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useSetAtom } from "jotai";
-import { selectedAreaAtom } from "../../../atom";
+import { selectedAreaAtom } from "../../atom";
+import areasNames, { Area } from "./areaNames";
+import { OnSelectCity } from "../../types";
 
-// sameple API call to get coordinates: "https://api.mapbox.com/geocoding/v5/mapbox.places/J P NAGAR.json"
-const areasNames = [
-  {
-    area_id: 280,
-    name: "indiranagar",
-    pin_code: 560078,
-    coordinates: [77.639757, 12.974614],
-  },
-  {
-    area_id: 272,
-    name: "BENSON TOWN SO",
-    pin_code: 560046,
-    coordinates: [77.6044, 12.9985],
-  },
-  {
-    area_id: 259,
-    name: "HSR Layout",
-    pin_code: 560102,
-    coordinates: [77.64, 12.91],
-  },
-  {
-    area_id: 291,
-    name: "FRAZER TOWN",
-    pin_code: 560005,
-    coordinates: [77.614162, 12.996865],
-  },
-  {
-    area_id: 261,
-    name: "Koramangala po",
-    pin_code: 560034,
-    coordinates: [77.6229, 12.9259],
-  },
-  {
-    area_id: 239,
-    name: "ELECTRONIC CITY PO",
-    pin_code: 560100,
-    coordinates: [77.6727, 12.8458],
-  },
-  {
-    area_id: 302,
-    name: "J P Nagar PO",
-    pin_code: 560078,
-    coordinates: [77.576778, 12.890542],
-  },
-];
-
-const CommandPalette = ({ onSelectCity }: any) => {
+type Props = {
+  onSelectCity: OnSelectCity;
+};
+const CommandPalette: FC<Props> = ({ onSelectCity }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const setSelectedAtom = useSetAtom<any>(selectedAreaAtom);
+  const setSelectedAtom = useSetAtom(selectedAreaAtom);
 
   const filteredAreas = query
     ? areasNames.filter((areaName) =>
@@ -111,7 +70,7 @@ const CommandPalette = ({ onSelectCity }: any) => {
             leaveTo="opacity-0 scale-95"
           >
             <Combobox
-              onChange={(area: any) => {
+              onChange={(area: Area) => {
                 setIsOpen(false);
                 onSelectCity({
                   longitude: area.coordinates[0],

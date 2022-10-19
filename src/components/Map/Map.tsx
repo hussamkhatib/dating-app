@@ -1,18 +1,19 @@
 import { useSetAtom } from "jotai";
-import mapboxgl from "mapbox-gl";
+import mapboxgl, { MapLayerMouseEvent } from "mapbox-gl";
 import { useState, useCallback, useRef } from "react";
 import ReactMap, { MapRef } from "react-map-gl";
 import { selectedAreaAtom } from "../../atom";
+import { HoverInfoType } from "../../types";
 import Filter from "../Filter";
 import NavBar from "../NavBar";
-import Polygons from "./Polygons";
-import Tooltip from "./Tooltip";
+import Polygons from "../Polygons";
+import Tooltip from "../Tooltip";
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN;
 
 const Map = () => {
   const mapRef = useRef<MapRef>(null);
-  const setSelectedAtom = useSetAtom(selectedAreaAtom);
+
   const [viewState, setViewState] = useState({
     longitude: 77.57,
     latitude: 12.89,
@@ -20,24 +21,25 @@ const Map = () => {
     pitch: 45,
     bearing: 340,
   });
-  const [hoverInfo, setHoverInfo] = useState<any>(null);
+  const [hoverInfo, setHoverInfo] = useState<HoverInfoType | null>(null);
 
-  const handleClick = (e: any) => {
+  const setSelectedAtom = useSetAtom(selectedAreaAtom);
+
+  const handleClick = (e: MapLayerMouseEvent) => {
     const { features } = e;
-
-    if (features[0]) {
-      setSelectedAtom(features[0].properties);
-    }
+    if (features?.[0]) setSelectedAtom(features[0].properties);
   };
 
-  /* @ts-ignore TODO: //FIX THIS */
-  const onHover = useCallback((event) => {
+  const onHover = useCallback((event: MapLayerMouseEvent) => {
     const {
       features,
       point: { x, y },
     } = event;
     const hoveredFeature = features?.[0] && features[0].properties;
-    setHoverInfo(hoveredFeature && { property: hoveredFeature, x, y });
+    if (hoveredFeature) {
+      const hoverInfo = { property: hoveredFeature, x, y };
+      setHoverInfo(hoverInfo);
+    }
   }, []);
 
   const onSelectCity = useCallback(

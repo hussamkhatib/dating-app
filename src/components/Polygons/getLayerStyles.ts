@@ -19,8 +19,8 @@ export const getStops = (a: number, b: number): [number, string][] => {
 // property -> values on the geojson
 export const getLayerStyles = (
   property: string,
-  min: number = 0,
-  max: number = 260
+  min = 0,
+  max = 260
 ): FillLayer => {
   return {
     id: "data",

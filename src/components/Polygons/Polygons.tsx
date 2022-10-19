@@ -1,22 +1,18 @@
 import { useMemo } from "react";
-import useApi from "../../../hooks/useAPI";
 import { Layer, Source } from "react-map-gl";
 import { getLayerStyles, highlightedLayerStyles } from "./getLayerStyles";
-import {
-  activeMapType,
-  filterAtom,
-  SelectedArea,
-  selectedAreaAtom,
-} from "../../../atom";
+
 import { useAtom } from "jotai";
 import Range from "./Range";
 import ActiveArea from "./ActiveArea";
+import { activeMapType, filterAtom, selectedAreaAtom } from "../../atom";
+import useAPI from "../../hooks/useAPI";
 
 const Polygons = () => {
   const [activeMap] = useAtom(activeMapType);
-  const [selectedArea] = useAtom<SelectedArea | null>(selectedAreaAtom);
+  const [selectedArea] = useAtom(selectedAreaAtom);
   const [filter] = useAtom(filterAtom);
-  const { data, loading, error } = useApi(activeMap, filter);
+  const { data } = useAPI(activeMap, filter);
 
   const layerStyles = getLayerStyles(
     activeMap,
@@ -32,7 +28,6 @@ const Polygons = () => {
   return data ? (
     <>
       <Source id="my-data" type="geojson" data={data.areas}>
-        {/* @ts-ignore */}
         <Layer {...layerStyles} />
         {selectedArea && (
           <Layer {...highlightedLayerStyles} filter={filterLayer} />

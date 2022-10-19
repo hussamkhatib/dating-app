@@ -24,7 +24,7 @@ const useAPI = (activeMap: mapType, filters: FilterType) => {
           // MAP 1
           if (activeMap === mapType.proUsers) {
             let proUsers = 0;
-            let areaProperties: any = [];
+            const areaProperties: any = [];
             for (let i = 0; i < users.length; i++) {
               const user = users[i];
               const { area_id, total_matches, age, gender, is_pro_user } = user;
@@ -54,7 +54,7 @@ const useAPI = (activeMap: mapType, filters: FilterType) => {
           }
           // MAP 2
           if (activeMap === mapType.users) {
-            let areaProperties: any = [];
+            const areaProperties: any = [];
 
             for (let i = 0; i < users.length; i++) {
               const user = users[i];
