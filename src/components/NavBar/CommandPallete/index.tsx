@@ -4,6 +4,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useSetAtom } from "jotai";
 import selectedAreaAtom from "../../../selectedArea";
 
+// sameple API call to get coordinates: "https://api.mapbox.com/geocoding/v5/mapbox.places/J P NAGAR.json"
 const areasNames = [
   {
     area_id: 280,
@@ -73,9 +74,13 @@ const CommandPalette = ({ onSelectCity }: any) => {
         onClick={() => setIsOpen(true)}
       >
         <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" aria-hidden />
-        CMD + K
+        Ctrl + K
       </button>
-      <Transition.Root show={isOpen} as={Fragment} afterLeave={() => {}}>
+      <Transition.Root
+        show={isOpen}
+        as={Fragment}
+        afterLeave={() => setQuery("")}
+      >
         <Dialog
           onClose={setIsOpen}
           className="fixed inset-0 z-20 p-4 pt-[25vh] overflow-y-auto"
@@ -99,7 +104,14 @@ const CommandPalette = ({ onSelectCity }: any) => {
             leaveTo="opacity-0 scale-95"
           >
             <Combobox
-              onChange={() => {}}
+              onChange={(area: any) => {
+                setIsOpen(false);
+                onSelectCity({
+                  longitude: area.coordinates[0],
+                  latitude: area.coordinates[1],
+                });
+                setSelectedAtom(area.area_id);
+              }}
               as="div"
               className="bg-white rounded-xl shadow-2xl max-w-xl relative mx-auto ring-1 ring-black/5 divide-y overflow-hidden"
             >
@@ -116,32 +128,30 @@ const CommandPalette = ({ onSelectCity }: any) => {
                   placeholder="search"
                 />
               </div>
-              <Combobox.Options
-                static
-                className="py-4 text-sm max-h-96 overflow-y-auto"
-              >
-                {filteredAreas.map((areaName) => (
-                  <Combobox.Option value={areaName} key={areaName.name}>
-                    {({ active }) => (
-                      <button
-                        onClick={() => {
-                          setIsOpen(false);
-                          onSelectCity({
-                            longitude: areaName.coordinates[0],
-                            latitude: areaName.coordinates[1],
-                          });
-                          setSelectedAtom(areaName.area_id);
-                        }}
-                        className={`px-4 py-2 w-full text-left ${
-                          active ? "bg-indigo-600 text-indigo-200" : "bg-white"
-                        }`}
-                      >
-                        {areaName.name}
-                      </button>
-                    )}
-                  </Combobox.Option>
-                ))}
-              </Combobox.Options>
+              {filteredAreas.length > 0 ? (
+                <Combobox.Options
+                  static
+                  className="py-4 text-sm max-h-96 overflow-y-auto"
+                >
+                  {filteredAreas.map((area) => (
+                    <Combobox.Option value={area} key={area.name}>
+                      {({ active }) => (
+                        <div
+                          className={`px-4 py-2 w-full text-left ${
+                            active
+                              ? "bg-indigo-600 text-indigo-200"
+                              : "bg-white"
+                          }`}
+                        >
+                          {area.name}
+                        </div>
+                      )}
+                    </Combobox.Option>
+                  ))}
+                </Combobox.Options>
+              ) : (
+                <p className="text-sm p-4 text-gray-500">No search Results</p>
+              )}
             </Combobox>
           </Transition.Child>
         </Dialog>

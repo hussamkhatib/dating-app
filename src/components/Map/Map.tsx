@@ -26,8 +26,7 @@ const Map = () => {
     const { features } = e;
 
     if (features[0]) {
-      const { area_id } = features[0].properties;
-      setSelectedAtom(area_id);
+      setSelectedAtom(features[0].properties);
     }
   };
 
@@ -64,6 +63,7 @@ const Map = () => {
       >
         <Polygons />
         <Filter />
+
         <Tooltip hoverInfo={hoverInfo} />
       </ReactMap>
     </>

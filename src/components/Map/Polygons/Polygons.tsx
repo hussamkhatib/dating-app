@@ -4,13 +4,14 @@ import { Layer, Source } from "react-map-gl";
 import { getLayerStyles, highlightedLayerStyles } from "./getLayerStyles";
 import { activeMapType } from "../../../activeMap";
 import { useAtom } from "jotai";
-import selectedAreaAtom from "../../../selectedArea";
-import { filterAtom, FilterType } from "../../../filterAtom";
+import selectedAreaAtom, { SelectedArea } from "../../../selectedArea";
+import { filterAtom } from "../../../filterAtom";
 import Range from "./Range";
+import ActiveArea from "./ActiveArea";
 
 const Polygons = () => {
   const [activeMap] = useAtom(activeMapType);
-  const [selectedArea] = useAtom(selectedAreaAtom);
+  const [selectedArea] = useAtom<SelectedArea | null>(selectedAreaAtom);
   const [filter] = useAtom(filterAtom);
   const { data, loading, error } = useApi(activeMap, filter);
 
@@ -23,18 +24,21 @@ const Polygons = () => {
   );
 
   const filterLayer = useMemo(
-    () => ["in", "area_id", selectedArea],
-    [selectedArea]
+    () => ["in", "area_id", selectedArea?.area_id],
+    [selectedArea?.area_id]
   );
-  console.log(filter, data);
+  console.log(selectedArea?.area_id);
 
   return data ? (
     <>
       <Source id="my-data" type="geojson" data={data.areas}>
         {/* @ts-ignore */}
         <Layer {...layerStyles} />
-        <Layer {...highlightedLayerStyles} filter={filterLayer} />
+        {selectedArea && (
+          <Layer {...highlightedLayerStyles} filter={filterLayer} />
+        )}
       </Source>
+      {selectedArea && <ActiveArea selectedArea={selectedArea} />}
       <Range min={data?.range?.min} max={data?.range?.max} />
     </>
   ) : null;

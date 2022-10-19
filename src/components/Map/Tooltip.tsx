@@ -20,7 +20,7 @@ const Tooltip: FC<Props> = ({ hoverInfo }) => {
   delete copyProperty.area_id;
   return (
     <div
-      className="fixed z-10 m-2 p-1 max-w-xs pointer-events-none flex flex-col text-[#00FFA4] bg-[#102B44] rounded-xl px-3"
+      className="fixed z-10 m-2 p-1 max-w-xs pointer-events-none flex flex-col bg-white rounded-xl px-3"
       style={{ left, top }}
     >
       {Object.entries(copyProperty).map(([key, value]: any) => (
