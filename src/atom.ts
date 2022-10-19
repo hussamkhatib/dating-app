@@ -1,9 +1,11 @@
 import { atom } from "jotai";
 import { PolygonProperties } from "./types";
 
+export type Age = "All" | "18-30" | "30+";
+export type Gender = "All" | "M" | "F";
 export type FilterType = {
-  age: string;
-  gender: string;
+  age: Age;
+  gender: Gender;
 };
 
 export enum mapType {

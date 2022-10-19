@@ -17,7 +17,7 @@ const Map = () => {
   const [viewState, setViewState] = useState({
     longitude: 77.57,
     latitude: 12.89,
-    zoom: 12,
+    zoom: 10.4,
     pitch: 45,
     bearing: 340,
   });
