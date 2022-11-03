@@ -27,7 +27,9 @@ const Map = () => {
 
   const handleClick = (e: MapLayerMouseEvent) => {
     const { features } = e;
-    if (features?.[0]) setSelectedAtom(features[0].properties);
+    features?.[0]
+      ? setSelectedAtom(features[0].properties)
+      : setSelectedAtom(null);
   };
 
   const onHover = useCallback((event: MapLayerMouseEvent) => {
@@ -65,7 +67,6 @@ const Map = () => {
       >
         <Polygons />
         <Filter />
-
         <Tooltip hoverInfo={hoverInfo} />
       </ReactMap>
     </>
