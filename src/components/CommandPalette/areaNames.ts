@@ -11,7 +11,7 @@ const areasNames: Area[] = [
     area_id: 280,
     name: "indiranagar",
     pin_code: 560078,
-    coordinates: [77.639757, 12.974614],
+    coordinates: [77.6408356, 12.9783692],
   },
   {
     area_id: 272,

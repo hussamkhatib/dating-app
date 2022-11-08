@@ -21,7 +21,7 @@ const Range: FC<Props> = ({ min, max }) => {
   return (
     <div className="fixed z-20 bottom-8 left-8 text-gray-200">
       {range.map((stop, idx) => (
-        <div key={idx} className="flex  gap-x-1 h-6">
+        <div key={idx} className="flex gap-x-1 h-6">
           <div
             className={`w-4 border-black border-b-[1px] ${linearHeatMapColorsTailclasses[idx]}`}
           />

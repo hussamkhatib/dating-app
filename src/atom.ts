@@ -15,7 +15,7 @@ export enum mapType {
 
 export const isFilterPanelOpenAtom = atom(false);
 
-export const filterAtom = atom({
+export const filterAtom = atom<FilterType>({
   age: "All",
   gender: "All",
 });
